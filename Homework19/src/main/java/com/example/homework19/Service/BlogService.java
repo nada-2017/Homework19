@@ -62,11 +62,6 @@ public class BlogService {
     }
 
     public void published(){
-        List<Blog> blogs = blogRepository.findAll();
-        for (Blog b:blogs) {
-            b.setIsPublished(true);
-            blogRepository.save(b);
-        }
-
+            blogRepository.allPublished();
     }
 }

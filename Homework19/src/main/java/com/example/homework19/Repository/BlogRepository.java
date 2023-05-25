@@ -3,7 +3,9 @@ package com.example.homework19.Repository;
 import com.example.homework19.Model.Blog;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,6 +21,10 @@ public interface BlogRepository extends JpaRepository<Blog,Integer> {
     @Query("select b from Blog b where b.category = ?1")
     List<Blog> getBlogsByCategory(String category);
 
+    @Transactional
+    @Modifying
+    @Query("update Blog set isPublished = true")
+    void allPublished();
 
 
 }

@@ -2,8 +2,11 @@ package com.example.homework19.ControllerAdvise;
 
 import com.example.homework19.ApiException.ApiException;
 import com.example.homework19.ApiResponse.ApiResponse;
+import jakarta.persistence.TransactionRequiredException;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.TransactionSystemException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -26,5 +29,16 @@ public class ControllerAdvise {
     public ResponseEntity<ApiResponse> MethodArgumentNotValidException(MethodArgumentNotValidException e){
         return ResponseEntity.status(400).body(new ApiResponse(e.getMessage()));
     }
-
+    @ExceptionHandler(TransactionSystemException.class)
+    public ResponseEntity<ApiResponse> TransactionSystemException(TransactionSystemException e){
+        return ResponseEntity.status(200).body(new ApiResponse(e.getMessage()));
+    }
+    @ExceptionHandler(TransactionRequiredException.class)
+    public ResponseEntity<ApiResponse> TransactionRequiredException(TransactionRequiredException e){
+        return ResponseEntity.status(200).body(new ApiResponse(e.getMessage()));
+    }
+    @ExceptionHandler(InvalidDataAccessApiUsageException.class)
+    public ResponseEntity<ApiResponse> InvalidDataAccessApiUsageException(InvalidDataAccessApiUsageException e){
+        return ResponseEntity.status(200).body(new ApiResponse(e.getMessage()));
+    }
 }

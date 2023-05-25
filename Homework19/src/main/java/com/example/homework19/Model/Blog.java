@@ -29,7 +29,7 @@ public class Blog {
     @Column(columnDefinition = "varchar(20) not null check(category='health' or category='education' or category='programming')")
     private String category;
 
-    //@AssertFalse(message = "Publishing must be false")
-    //@Column(columnDefinition = "boolean default false")
+    @AssertFalse(message = "Publishing must be false")
+    @Column(columnDefinition = "boolean default false")
     private Boolean isPublished = false;
 }
